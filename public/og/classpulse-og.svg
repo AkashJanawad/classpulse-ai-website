@@ -1,0 +1,17 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#071013"/>
+  <rect x="70" y="70" width="1060" height="490" rx="34" fill="#F7FBFA"/>
+  <rect x="112" y="112" width="88" height="88" rx="24" fill="#0F766E"/>
+  <path d="M132 165C146 139 160 128 174 128C192 128 197 155 214 155C220 155 226 152 232 146" stroke="#F7FBFA" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="140" cy="170" r="8" fill="#F5B640"/>
+  <circle cx="176" cy="128" r="8" fill="#F9735B"/>
+  <text x="232" y="166" fill="#0B1215" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="800">ClassPulse AI</text>
+  <text x="112" y="292" fill="#0B1215" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="900">Classroom intelligence for modern schools.</text>
+  <text x="112" y="374" fill="#355057" font-family="Inter, Arial, sans-serif" font-size="32">Attendance, engagement, and learning signals in one privacy-aware AI dashboard.</text>
+  <rect x="840" y="118" width="230" height="330" rx="24" fill="#0F766E"/>
+  <rect x="876" y="158" width="158" height="22" rx="11" fill="#D3F8EE"/>
+  <rect x="876" y="210" width="116" height="116" rx="58" fill="#F5B640"/>
+  <rect x="906" y="240" width="56" height="56" rx="28" fill="#F7FBFA"/>
+  <rect x="876" y="362" width="152" height="20" rx="10" fill="#F7FBFA"/>
+  <rect x="876" y="402" width="94" height="20" rx="10" fill="#F9735B"/>
+</svg>
