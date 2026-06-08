@@ -17,6 +17,12 @@ import {
   Zap,
 } from 'lucide-react';
 
+export const contactDetails = {
+  email: 'classpulseai@gmail.com',
+  phone: '8618162468',
+  address: 'Belagavi 590008',
+};
+
 export const navItems = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
@@ -98,6 +104,46 @@ export const team = [
     role: 'Deployment and secure infrastructure',
     text: 'The platform is designed for lean deployment, GitHub updates, Linux servers, and Termux-based hosting.',
   },
+];
+
+export const founders = [
+  {
+    name: 'Akash Janawad',
+    role: 'Co-owner, Product Strategy',
+    image: '/team/Akash_Janawad.jpg',
+    text: 'Akash helps shape the ClassPulse AI product vision, school workflow ideas, and the practical direction of the platform.',
+  },
+  {
+    name: 'Suresh Murgod',
+    role: 'Co-owner, Operations',
+    image: '/team/Suresh_Murgod.jpg',
+    text: 'Suresh supports operations, coordination, and the disciplined execution needed to move the startup from idea to real adoption.',
+  },
+  {
+    name: 'Karan Jadhav',
+    role: 'Co-owner, Technology',
+    image: '/team/Karan_Jadhav.jpg',
+    text: 'Karan focuses on technology planning, platform reliability, and keeping the product lightweight enough for lean deployment.',
+  },
+  {
+    name: 'Vaishnavi Modekar',
+    role: 'Co-owner, Experience Design',
+    image: '/team/Vaishnavi_Modekar.jpg',
+    text: 'Vaishnavi contributes to user experience, communication clarity, and making the product feel approachable for schools.',
+  },
+  {
+    name: 'Danesh Mang',
+    role: 'Co-owner, Growth',
+    image: '/team/Danesh_Mang.jpg',
+    text: 'Danesh supports outreach, partnerships, and the growth path for ClassPulse AI as it prepares for school pilots.',
+  },
+];
+
+export const companyStrengths = [
+  'Built by a focused founding team in Belagavi',
+  'Designed for schools that need useful AI without heavy infrastructure',
+  'Prepared for Android Termux, Linux, GitHub, and Cloudflare Tunnel deployment',
+  'Focused on privacy-aware insights, simple workflows, and fast adoption',
 ];
 
 export const values = [

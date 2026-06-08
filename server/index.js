@@ -70,7 +70,7 @@ app.post('/api/contact', (req, res) => {
     organization: String(organization || '').slice(0, 160),
     message: String(message).slice(0, 1200),
     receivedAt: new Date().toISOString(),
-    receiver: process.env.CONTACT_RECEIVER || 'hello@classpulseai.com',
+    receiver: process.env.CONTACT_RECEIVER || 'classpulseai@gmail.com',
   };
 
   if (process.env.CONTACT_LOGGING !== 'false') {

@@ -39,7 +39,7 @@ Recommended values:
 NODE_ENV=production
 PORT=8080
 SITE_URL=https://classpulseai.com
-CONTACT_RECEIVER=hello@classpulseai.com
+CONTACT_RECEIVER=classpulseai@gmail.com
 CONTACT_LOGGING=true
 ```
 

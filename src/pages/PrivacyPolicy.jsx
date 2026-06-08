@@ -20,7 +20,7 @@ const sections = [
   },
   {
     title: 'Contact',
-    text: 'For privacy questions, contact hello@classpulseai.com.',
+    text: 'For privacy questions, contact classpulseai@gmail.com.',
   },
 ];
 

@@ -1,6 +1,6 @@
-import { Mail, MapPin, ShieldCheck } from 'lucide-react';
+import { Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { navItems } from '../data/site.js';
+import { contactDetails, navItems } from '../data/site.js';
 
 export default function Footer() {
   return (
@@ -32,10 +32,13 @@ export default function Footer() {
           <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-ink/60 dark:text-white/55">Contact</h2>
           <div className="mt-4 grid gap-3 text-sm text-ink/72 dark:text-white/70">
             <p className="flex items-center gap-2">
-              <Mail size={16} aria-hidden="true" /> hello@classpulseai.com
+              <Mail size={16} aria-hidden="true" /> {contactDetails.email}
             </p>
             <p className="flex items-center gap-2">
-              <MapPin size={16} aria-hidden="true" /> Built for schools, deployable anywhere
+              <Phone size={16} aria-hidden="true" /> {contactDetails.phone}
+            </p>
+            <p className="flex items-center gap-2">
+              <MapPin size={16} aria-hidden="true" /> {contactDetails.address}
             </p>
             <p className="flex items-center gap-2">
               <ShieldCheck size={16} aria-hidden="true" /> Privacy-first product roadmap

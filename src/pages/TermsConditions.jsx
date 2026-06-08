@@ -20,7 +20,7 @@ const terms = [
   },
   {
     title: 'Contact',
-    text: 'Questions about these terms can be sent to hello@classpulseai.com.',
+    text: 'Questions about these terms can be sent to classpulseai@gmail.com.',
   },
 ];
 

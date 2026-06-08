@@ -1,6 +1,7 @@
-import { Cloud, Mail, Server } from 'lucide-react';
+import { Cloud, Mail, MapPin, Phone, Server } from 'lucide-react';
 import ContactForm from '../components/ContactForm.jsx';
 import PageHero from '../components/PageHero.jsx';
+import { contactDetails } from '../data/site.js';
 import useSeo from '../hooks/useSeo.js';
 
 export default function Contact() {
@@ -22,7 +23,9 @@ export default function Contact() {
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.8fr_1.2fr]">
           <div className="grid gap-4">
             {[
-              { icon: Mail, title: 'Email', text: 'hello@classpulseai.com' },
+              { icon: Mail, title: 'Email', text: contactDetails.email },
+              { icon: Phone, title: 'Phone', text: contactDetails.phone },
+              { icon: MapPin, title: 'Address', text: contactDetails.address },
               { icon: Server, title: 'Lean hosting', text: 'Linux and Termux deployment without Docker.' },
               { icon: Cloud, title: 'Cloudflare ready', text: 'Designed to sit behind a secure Cloudflare Tunnel.' },
             ].map((item) => {

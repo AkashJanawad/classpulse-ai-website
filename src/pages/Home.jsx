@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ButtonLink from '../components/ButtonLink.jsx';
 import ProductVisual from '../components/ProductVisual.jsx';
 import SectionHeader from '../components/SectionHeader.jsx';
-import { featureCards, metrics, values, workflow } from '../data/site.js';
+import { contactDetails, featureCards, founders, metrics, values, workflow } from '../data/site.js';
 import useSeo from '../hooks/useSeo.js';
 
 export default function Home() {
@@ -100,6 +100,43 @@ export default function Home() {
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 rounded-2xl border border-ink/10 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-white/[0.06] sm:p-8 lg:grid-cols-[.92fr_1.08fr] lg:items-center">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-teal-700 dark:text-teal-300">
+              Founder-led from {contactDetails.address}
+            </p>
+            <h2 className="mt-4 text-balance text-3xl font-black leading-tight text-ink dark:text-white sm:text-4xl">
+              Built by owners who are close to the product, the users, and the deployment reality.
+            </h2>
+            <p className="mt-4 text-base leading-8 text-ink/70 dark:text-white/70">
+              ClassPulse AI is not just a landing page. It is being shaped as a practical school-tech product by a
+              focused ownership team across product, technology, design, operations, and growth.
+            </p>
+            <div className="mt-6">
+              <ButtonLink to="/team" variant="secondary">
+                Meet the owners
+              </ButtonLink>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-5 lg:grid-cols-5">
+            {founders.map((person) => (
+              <Link key={person.name} to="/team" className="group text-center">
+                <div className="mx-auto h-24 w-24 rounded-full border-4 border-mist bg-white p-1 shadow-sm transition group-hover:-translate-y-1 group-hover:border-teal-500 dark:border-white/12 dark:bg-night sm:h-20 sm:w-20 lg:h-24 lg:w-24">
+                  <img
+                    src={person.image}
+                    alt={person.name}
+                    className="h-full w-full rounded-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <p className="mt-3 text-sm font-black leading-tight text-ink dark:text-white">{person.name}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
