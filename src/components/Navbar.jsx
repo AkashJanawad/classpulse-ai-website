@@ -24,7 +24,7 @@ export default function Navbar() {
       </a>
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <NavLink to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <img src="/brand/classpulse-mark.svg" alt="" className="h-11 w-11 rounded-lg" />
+          <img src="/logo.png" alt="" className="h-11 w-11 rounded-lg object-contain" />
           <span className="text-lg font-black tracking-normal text-ink dark:text-white">ClassPulse AI</span>
         </NavLink>
 

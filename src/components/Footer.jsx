@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.2fr_.8fr_.8fr]">
         <div>
           <div className="flex items-center gap-3">
-            <img src="/brand/classpulse-mark.svg" alt="" className="h-11 w-11 rounded-lg" />
+            <img src="/logo.png" alt="" className="h-11 w-11 rounded-lg object-contain" />
             <span className="text-lg font-black text-ink dark:text-white">ClassPulse AI</span>
           </div>
           <p className="mt-5 max-w-xl text-sm leading-7 text-ink/68 dark:text-white/68">

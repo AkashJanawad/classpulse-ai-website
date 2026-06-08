@@ -19,6 +19,7 @@ classpulse-ai-website/
   public/
     brand/
     og/
+    logo.png
     robots.txt
     sitemap.xml
   scripts/
