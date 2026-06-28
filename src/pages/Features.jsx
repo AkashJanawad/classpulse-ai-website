@@ -18,16 +18,16 @@ export default function Features() {
         text="Start with the core school signals, then expand into AI-supported workflows as your team is ready."
       />
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8">
+      <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {featureCards.map((feature) => {
               const Icon = feature.icon;
               return (
-                <article key={feature.title} className="rounded-xl border border-ink/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/[0.06]">
-                  <Icon size={28} className="text-teal-700 dark:text-teal-300" aria-hidden="true" />
-                  <h2 className="mt-5 text-xl font-black text-ink dark:text-white">{feature.title}</h2>
-                  <p className="mt-3 text-sm leading-7 text-ink/68 dark:text-white/68">{feature.text}</p>
+                <article key={feature.title} className="glass-panel rounded-2xl p-6 transition duration-300 hover:-translate-y-1 hover:border-primary/40">
+                  <Icon size={28} className="text-primary" aria-hidden="true" />
+                  <h2 className="mt-5 text-xl font-black text-white">{feature.title}</h2>
+                  <p className="mt-3 text-sm leading-7 text-white/64">{feature.text}</p>
                 </article>
               );
             })}
@@ -35,7 +35,7 @@ export default function Features() {
         </div>
       </section>
 
-      <section className="bg-white px-4 py-16 dark:bg-white/[0.03] sm:px-6 lg:px-8">
+      <section className="border-y border-white/10 bg-white/[0.03] px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Operational flow"
@@ -47,10 +47,10 @@ export default function Features() {
             {workflow.map((item) => {
               const Icon = item.icon;
               return (
-                <article key={item.title} className="rounded-xl bg-paper p-6 dark:bg-night">
-                  <Icon size={26} className="text-coral" aria-hidden="true" />
-                  <h3 className="mt-5 text-xl font-black text-ink dark:text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-ink/68 dark:text-white/68">{item.text}</p>
+                <article key={item.title} className="rounded-2xl border border-white/10 bg-[#080b16]/80 p-6 shadow-violet">
+                  <Icon size={26} className="text-tertiary" aria-hidden="true" />
+                  <h3 className="mt-5 text-xl font-black text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-white/64">{item.text}</p>
                 </article>
               );
             })}

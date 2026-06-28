@@ -9,11 +9,11 @@ export default function NotFound() {
   });
 
   return (
-    <section className="px-4 pb-20 pt-32 sm:px-6 lg:px-8">
+    <section className="bg-aurora px-4 pb-20 pt-32 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="text-sm font-bold uppercase tracking-[0.18em] text-teal-700 dark:text-teal-300">404</p>
-        <h1 className="mt-4 text-4xl font-black text-ink dark:text-white sm:text-5xl">This page is not available.</h1>
-        <p className="mx-auto mt-4 max-w-xl text-base leading-8 text-ink/70 dark:text-white/70">
+        <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">404</p>
+        <h1 className="mt-4 text-4xl font-black text-white sm:text-5xl">This page is not available.</h1>
+        <p className="mx-auto mt-4 max-w-xl text-base leading-8 text-white/70">
           The ClassPulse AI page you tried to open may have moved or does not exist yet.
         </p>
         <div className="mt-8">

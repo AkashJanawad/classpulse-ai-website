@@ -42,9 +42,9 @@ export default function TermsConditions() {
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-4xl gap-6">
           {terms.map((section) => (
-            <article key={section.title} className="rounded-xl border border-ink/10 bg-white p-6 dark:border-white/10 dark:bg-white/[0.06]">
-              <h2 className="text-xl font-black text-ink dark:text-white">{section.title}</h2>
-              <p className="mt-3 text-sm leading-7 text-ink/70 dark:text-white/70">{section.text}</p>
+            <article key={section.title} className="glass-panel rounded-2xl p-6">
+              <h2 className="text-xl font-black text-white">{section.title}</h2>
+              <p className="mt-3 text-sm leading-7 text-white/70">{section.text}</p>
             </article>
           ))}
         </div>

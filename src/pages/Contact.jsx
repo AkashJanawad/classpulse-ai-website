@@ -19,7 +19,7 @@ export default function Contact() {
         text="Send a short note about your school, pilot idea, or deployment question. The backend includes a production-ready contact endpoint that can later be connected to email or a CRM."
       />
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8">
+      <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.8fr_1.2fr]">
           <div className="grid gap-4">
             {[
@@ -31,10 +31,10 @@ export default function Contact() {
             ].map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className="rounded-xl border border-ink/10 bg-white p-5 dark:border-white/10 dark:bg-white/[0.06]">
-                  <Icon size={24} className="text-teal-700 dark:text-teal-300" aria-hidden="true" />
-                  <h2 className="mt-4 text-lg font-black text-ink dark:text-white">{item.title}</h2>
-                  <p className="mt-2 text-sm leading-7 text-ink/68 dark:text-white/68">{item.text}</p>
+                <div key={item.title} className="glass-panel rounded-2xl p-5 transition hover:-translate-y-1 hover:border-primary/40">
+                  <Icon size={24} className="text-primary" aria-hidden="true" />
+                  <h2 className="mt-4 text-lg font-black text-white">{item.title}</h2>
+                  <p className="mt-2 text-sm leading-7 text-white/64">{item.text}</p>
                 </div>
               );
             })}

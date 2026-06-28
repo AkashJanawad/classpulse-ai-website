@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 
 const variants = {
   primary:
-    'bg-teal-700 text-white shadow-glow hover:bg-teal-600 focus-visible:outline-teal-500 dark:bg-teal-500 dark:text-night dark:hover:bg-teal-100',
+    'border border-primary/50 bg-primary/14 text-white shadow-violet hover:border-secondary/70 hover:bg-primary/22 focus-visible:outline-primary',
   secondary:
-    'border border-ink/15 bg-white/80 text-ink hover:border-teal-600 hover:text-teal-700 focus-visible:outline-teal-600 dark:border-white/15 dark:bg-white/8 dark:text-white dark:hover:border-teal-300 dark:hover:text-teal-100',
+    'border border-white/14 bg-white/7 text-white hover:border-tertiary/60 hover:bg-white/12 focus-visible:outline-tertiary',
 };
 
 export default function ButtonLink({ to, children, variant = 'primary', showIcon = true }) {
   return (
     <Link
       to={to}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-5 text-sm font800 font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${variants[variant]}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-5 text-sm font800 font-semibold backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${variants[variant]}`}
     >
       <span>{children}</span>
       {showIcon ? <ArrowRight aria-hidden="true" size={18} /> : null}

@@ -42,25 +42,25 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={submitForm} className="rounded-2xl border border-ink/10 bg-white p-5 shadow-soft dark:border-white/10 dark:bg-white/[0.06] sm:p-6">
+    <form onSubmit={submitForm} className="glass-panel rounded-2xl p-5 sm:p-6">
       <div className="hidden">
         <label htmlFor="website">Website</label>
         <input id="website" name="website" value={form.website} onChange={updateField} tabIndex="-1" autoComplete="off" />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-2 text-sm font-bold text-ink dark:text-white">
+        <label className="grid gap-2 text-sm font-bold text-white">
           Name
           <input
             required
             name="name"
             value={form.name}
             onChange={updateField}
-            className="min-h-12 rounded-lg border border-ink/12 bg-paper px-4 text-base font-medium outline-none transition focus:border-teal-600 focus:ring-4 focus:ring-teal-600/15 dark:border-white/12 dark:bg-night dark:text-white"
+            className="min-h-12 rounded-lg border border-white/12 bg-white/8 px-4 text-base font-medium text-white outline-none transition placeholder:text-white/35 focus:border-primary focus:ring-4 focus:ring-primary/15"
             placeholder="Your name"
           />
         </label>
-        <label className="grid gap-2 text-sm font-bold text-ink dark:text-white">
+        <label className="grid gap-2 text-sm font-bold text-white">
           Email
           <input
             required
@@ -68,24 +68,24 @@ export default function ContactForm() {
             name="email"
             value={form.email}
             onChange={updateField}
-            className="min-h-12 rounded-lg border border-ink/12 bg-paper px-4 text-base font-medium outline-none transition focus:border-teal-600 focus:ring-4 focus:ring-teal-600/15 dark:border-white/12 dark:bg-night dark:text-white"
+            className="min-h-12 rounded-lg border border-white/12 bg-white/8 px-4 text-base font-medium text-white outline-none transition placeholder:text-white/35 focus:border-primary focus:ring-4 focus:ring-primary/15"
             placeholder="you@school.org"
           />
         </label>
       </div>
 
-      <label className="mt-4 grid gap-2 text-sm font-bold text-ink dark:text-white">
+      <label className="mt-4 grid gap-2 text-sm font-bold text-white">
         Organization
         <input
           name="organization"
           value={form.organization}
           onChange={updateField}
-          className="min-h-12 rounded-lg border border-ink/12 bg-paper px-4 text-base font-medium outline-none transition focus:border-teal-600 focus:ring-4 focus:ring-teal-600/15 dark:border-white/12 dark:bg-night dark:text-white"
+          className="min-h-12 rounded-lg border border-white/12 bg-white/8 px-4 text-base font-medium text-white outline-none transition placeholder:text-white/35 focus:border-primary focus:ring-4 focus:ring-primary/15"
           placeholder="School, coaching center, or company"
         />
       </label>
 
-      <label className="mt-4 grid gap-2 text-sm font-bold text-ink dark:text-white">
+      <label className="mt-4 grid gap-2 text-sm font-bold text-white">
         Message
         <textarea
           required
@@ -93,7 +93,7 @@ export default function ContactForm() {
           value={form.message}
           onChange={updateField}
           rows="5"
-          className="resize-y rounded-lg border border-ink/12 bg-paper px-4 py-3 text-base font-medium outline-none transition focus:border-teal-600 focus:ring-4 focus:ring-teal-600/15 dark:border-white/12 dark:bg-night dark:text-white"
+          className="resize-y rounded-lg border border-white/12 bg-white/8 px-4 py-3 text-base font-medium text-white outline-none transition placeholder:text-white/35 focus:border-primary focus:ring-4 focus:ring-primary/15"
           placeholder="Tell us what you want to build or pilot."
         />
       </label>
@@ -101,7 +101,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status.state === 'loading'}
-        className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-teal-700 px-5 text-sm font-bold text-white shadow-glow transition hover:bg-teal-600 disabled:cursor-not-allowed disabled:opacity-70 dark:bg-teal-400 dark:text-night sm:w-auto"
+        className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-primary/50 bg-primary/16 px-5 text-sm font-bold text-white shadow-violet transition hover:-translate-y-0.5 hover:border-secondary/70 hover:bg-primary/24 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
         <Send size={18} aria-hidden="true" />
         {status.state === 'loading' ? 'Sending' : 'Send message'}
@@ -110,7 +110,7 @@ export default function ContactForm() {
       {status.message ? (
         <p
           className={`mt-4 text-sm font-semibold ${
-            status.state === 'error' ? 'text-coral' : 'text-teal-700 dark:text-teal-300'
+            status.state === 'error' ? 'text-coral' : 'text-tertiary'
           }`}
           role="status"
         >

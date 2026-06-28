@@ -16,6 +16,11 @@ html {
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(124, 58, 237, 0.22), transparent 32rem),
+    radial-gradient(circle at 80% 10%, rgba(251, 171, 255, 0.12), transparent 30rem),
+    #05070d;
 }
 
 button,
@@ -26,11 +31,66 @@ textarea {
 }
 
 ::selection {
-  background: rgba(20, 184, 166, 0.28);
+  background: rgba(208, 188, 255, 0.32);
 }
 
 .text-balance {
   text-wrap: balance;
+}
+
+.glass-panel {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(22px);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #ffffff 0%, #d0bcff 42%, #fbabff 72%, #4fdbc8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glow-text {
+  text-shadow: 0 0 32px rgba(208, 188, 255, 0.42);
+}
+
+.cinematic-hero {
+  isolation: isolate;
+  margin-bottom: -1px;
+}
+
+.cinematic-tag {
+  min-width: max-content;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.045)),
+    rgba(5, 7, 13, 0.22);
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  padding: 0.78rem 1rem;
+  text-transform: uppercase;
+  backdrop-filter: blur(20px);
+  animation: cinematic-tag-float 6.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes cinematic-tag-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
