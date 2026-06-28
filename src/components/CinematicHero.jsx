@@ -1,45 +1,69 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
-const FRAME_COUNT = 240;
-const FPS = 30;
-const FRAME_DURATION = 1000 / FPS;
-const FRAME_PATH = '/frames/ezgif-frame-';
-
-const floatingTags = [
-  { label: 'Insight Stream', className: 'left-[7%] top-[40%] sm:left-[10%] lg:left-[14%]' },
-  { label: 'AI Classroom Pulse Platform', className: 'right-[5%] top-[38%] sm:right-[9%] lg:right-[13%]' },
-  { label: 'Engagement', className: 'left-[8%] bottom-[20%] sm:left-[15%] sm:bottom-[24%]' },
-  { label: 'Attendance', className: 'right-[8%] bottom-[22%] sm:right-[17%] sm:bottom-[26%]' },
-  { label: 'Learning Signals', className: 'left-1/2 bottom-[13%] -translate-x-1/2 sm:bottom-[16%]' },
+const floatingCards = [
+  { label: 'Learning Signals', className: 'left-[8%] top-[34%] sm:left-[12%] lg:left-[16%]' },
+  { label: 'Attendance', className: 'right-[7%] top-[35%] sm:right-[12%] lg:right-[17%]' },
+  { label: 'AI Insights', className: 'left-[7%] bottom-[22%] sm:left-[16%] sm:bottom-[25%]' },
+  { label: 'Engagement', className: 'right-[8%] bottom-[22%] sm:right-[17%] sm:bottom-[27%]' },
+  { label: 'Personalized Learning', className: 'left-1/2 bottom-[13%] -translate-x-1/2 sm:bottom-[16%]' },
 ];
 
-function frameUrl(index) {
-  return `${FRAME_PATH}${String(index).padStart(3, '0')}.jpg`;
+function drawWaveLayer(context, width, height, time, options) {
+  const {
+    amplitude,
+    baseline,
+    color,
+    frequency,
+    lineWidth,
+    phase,
+    speed,
+    verticalDrift,
+  } = options;
+
+  context.beginPath();
+
+  for (let x = -40; x <= width + 40; x += 10) {
+    const progress = x / width;
+    const primary = Math.sin(progress * frequency + time * speed + phase);
+    const secondary = Math.sin(progress * frequency * 0.58 - time * speed * 0.74 + phase * 1.6);
+    const y = height * baseline + primary * amplitude + secondary * amplitude * 0.42 + Math.sin(time * 0.55 + phase) * verticalDrift;
+
+    if (x === -40) {
+      context.moveTo(x, y);
+    } else {
+      context.lineTo(x, y);
+    }
+  }
+
+  context.strokeStyle = color;
+  context.lineWidth = lineWidth;
+  context.lineCap = 'round';
+  context.shadowBlur = 26;
+  context.shadowColor = color;
+  context.stroke();
+  context.shadowBlur = 0;
 }
 
 export default function CinematicHero() {
   const canvasRef = useRef(null);
-  const imagesRef = useRef([]);
   const rafRef = useRef(0);
-  const lastFrameTimeRef = useRef(0);
-  const currentFrameRef = useRef(0);
-  const [isComplete, setIsComplete] = useState(false);
   const scrollProgress = useMotionValue(0);
   const smoothProgress = useSpring(scrollProgress, { stiffness: 86, damping: 24, mass: 0.5 });
-  const heroOpacity = useTransform(smoothProgress, [0, 0.18, 0.42], [1, 0.62, 0.04]);
-  const heroScale = useTransform(smoothProgress, [0, 0.42], [1, 0.982]);
+  const heroOpacity = useTransform(smoothProgress, [0, 0.42, 0.96], [1, 0.76, 0]);
+  const heroScale = useTransform(smoothProgress, [0, 0.96], [1, 0.982]);
 
-  const tagVariants = useMemo(
+  const cardVariants = useMemo(
     () => ({
-      hidden: { opacity: 0, y: 10, filter: 'blur(8px)' },
+      hidden: { opacity: 0, y: 14, scale: 0.96, filter: 'blur(10px)' },
       visible: (index) => ({
         opacity: 1,
         y: 0,
+        scale: 1,
         filter: 'blur(0px)',
         transition: {
-          delay: index * 0.14,
-          duration: 0.72,
+          delay: 2.25 + index * 0.14,
+          duration: 0.75,
           ease: [0.16, 1, 0.3, 1],
         },
       }),
@@ -49,14 +73,12 @@ export default function CinematicHero() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas?.getContext('2d', { alpha: false });
+    const context = canvas?.getContext('2d');
     if (!canvas || !context) {
       return undefined;
     }
 
-    let isMounted = true;
-
-    const sizeCanvas = () => {
+    const render = (timestamp) => {
       const { width, height } = canvas.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const targetWidth = Math.max(1, Math.floor(width * dpr));
@@ -66,94 +88,67 @@ export default function CinematicHero() {
         canvas.width = targetWidth;
         canvas.height = targetHeight;
       }
+
+      const time = timestamp * 0.001;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.save();
+      context.scale(dpr, dpr);
+
+      const gradient = context.createLinearGradient(0, 0, width, height);
+      gradient.addColorStop(0, '#030817');
+      gradient.addColorStop(0.42, '#07112b');
+      gradient.addColorStop(0.72, '#160d31');
+      gradient.addColorStop(1, '#05070d');
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, width, height);
+
+      const glow = context.createRadialGradient(width * 0.5, height * 0.46, 0, width * 0.5, height * 0.46, width * 0.58);
+      glow.addColorStop(0, 'rgba(99, 102, 241, 0.24)');
+      glow.addColorStop(0.44, 'rgba(147, 51, 234, 0.13)');
+      glow.addColorStop(1, 'rgba(5, 7, 13, 0)');
+      context.fillStyle = glow;
+      context.fillRect(0, 0, width, height);
+
+      context.globalCompositeOperation = 'lighter';
+      drawWaveLayer(context, width, height, time, {
+        amplitude: height * 0.072,
+        baseline: 0.5,
+        color: 'rgba(118, 141, 255, 0.44)',
+        frequency: 9.6,
+        lineWidth: Math.max(1.2, width * 0.002),
+        phase: 0.4,
+        speed: 0.82,
+        verticalDrift: height * 0.014,
+      });
+      drawWaveLayer(context, width, height, time, {
+        amplitude: height * 0.058,
+        baseline: 0.54,
+        color: 'rgba(208, 188, 255, 0.36)',
+        frequency: 8.3,
+        lineWidth: Math.max(1, width * 0.0015),
+        phase: 2.3,
+        speed: 0.68,
+        verticalDrift: height * 0.018,
+      });
+      drawWaveLayer(context, width, height, time, {
+        amplitude: height * 0.048,
+        baseline: 0.48,
+        color: 'rgba(79, 219, 200, 0.17)',
+        frequency: 11.8,
+        lineWidth: Math.max(0.8, width * 0.001),
+        phase: 4.2,
+        speed: 0.5,
+        verticalDrift: height * 0.012,
+      });
+
+      context.restore();
+      rafRef.current = requestAnimationFrame(render);
     };
 
-    const drawFrame = (image) => {
-      if (!image?.complete || !image.naturalWidth) {
-        return;
-      }
-
-      sizeCanvas();
-
-      const imageRatio = image.naturalWidth / image.naturalHeight;
-      const canvasRatio = canvas.width / canvas.height;
-      let drawWidth = canvas.width;
-      let drawHeight = canvas.height;
-      let offsetX = 0;
-      let offsetY = 0;
-
-      if (imageRatio > canvasRatio) {
-        drawHeight = canvas.height;
-        drawWidth = drawHeight * imageRatio;
-        offsetX = (canvas.width - drawWidth) / 2;
-      } else {
-        drawWidth = canvas.width;
-        drawHeight = drawWidth / imageRatio;
-        offsetY = (canvas.height - drawHeight) / 2;
-      }
-
-      context.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
-    };
-
-    const preloadFrames = () =>
-      Promise.all(
-        Array.from({ length: FRAME_COUNT }, (_, index) => {
-          const image = new Image();
-          image.decoding = 'async';
-          imagesRef.current[index] = image;
-
-          return new Promise((resolve) => {
-            image.onload = () => {
-              if (index === 0) {
-                drawFrame(image);
-              }
-              resolve();
-            };
-            image.onerror = resolve;
-            image.src = frameUrl(index + 1);
-          });
-        }),
-      );
-
-    const animate = (timestamp) => {
-      if (!lastFrameTimeRef.current) {
-        lastFrameTimeRef.current = timestamp;
-      }
-
-      if (timestamp - lastFrameTimeRef.current >= FRAME_DURATION && currentFrameRef.current < FRAME_COUNT - 1) {
-        currentFrameRef.current += 1;
-        lastFrameTimeRef.current = timestamp;
-        drawFrame(imagesRef.current[currentFrameRef.current]);
-      }
-
-      if (currentFrameRef.current < FRAME_COUNT - 1) {
-        rafRef.current = requestAnimationFrame(animate);
-        return;
-      }
-
-      drawFrame(imagesRef.current[FRAME_COUNT - 1]);
-      if (isMounted) {
-        setIsComplete(true);
-      }
-    };
-
-    const handleResize = () => {
-      drawFrame(imagesRef.current[currentFrameRef.current] || imagesRef.current[FRAME_COUNT - 1]);
-    };
-
-    preloadFrames().then(() => {
-      if (!isMounted) {
-        return;
-      }
-      rafRef.current = requestAnimationFrame(animate);
-    });
-
-    window.addEventListener('resize', handleResize, { passive: true });
+    rafRef.current = requestAnimationFrame(render);
 
     return () => {
-      isMounted = false;
       cancelAnimationFrame(rafRef.current);
-      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -171,31 +166,31 @@ export default function CinematicHero() {
   }, [scrollProgress]);
 
   return (
-    <section className="cinematic-hero relative h-screen overflow-clip bg-[#05070d]" aria-label="ClassPulse AI cinematic hero">
-      <motion.div
-        className="sticky top-0 h-screen overflow-hidden will-change-transform"
-        style={{ opacity: heroOpacity, scale: heroScale }}
-      >
+    <section className="cinematic-hero relative h-screen overflow-clip bg-[#05070d]" aria-label="ClassPulse AI hero">
+      <motion.div className="sticky top-0 h-screen overflow-hidden will-change-transform" style={{ opacity: heroOpacity, scale: heroScale }}>
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
+        <div className="cinematic-hero-vignette absolute inset-0" aria-hidden="true" />
 
-        <motion.div
-          className="pointer-events-none absolute inset-0 z-10 hidden sm:block"
-          initial="hidden"
-          animate={isComplete ? 'visible' : 'hidden'}
-        >
-          {floatingTags.map((tag, index) => (
-            <motion.div
-              key={tag.label}
-              custom={index}
-              className={`absolute ${tag.className}`}
-              variants={tagVariants}
-            >
-              <div className="cinematic-tag" style={{ animationDelay: `${index * -1.15}s` }}>
-                {tag.label}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="relative z-10 flex h-full items-center justify-center px-4 text-center sm:px-6 lg:px-8">
+          <motion.h1
+            className="cinematic-title text-balance text-5xl font-black leading-none sm:text-7xl md:text-8xl lg:text-9xl"
+            initial={{ opacity: 0, scale: 0.95, y: 16, filter: 'blur(16px)' }}
+            animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ delay: 1.15, duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            ClassPulse AI
+          </motion.h1>
+
+          <motion.div className="pointer-events-none absolute inset-0 z-10" initial="hidden" animate="visible">
+            {floatingCards.map((card, index) => (
+              <motion.div key={card.label} custom={index} className={`absolute ${card.className}`} variants={cardVariants}>
+                <div className="cinematic-card" style={{ animationDelay: `${index * -1.2}s` }}>
+                  {card.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </motion.div>
     </section>
   );
