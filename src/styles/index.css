@@ -7,6 +7,50 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* LIGHT MODE SEMANTIC TOKENS - RICHER & MORE PREMIUM */
+  --surface-base: #FCFDFD; /* Warmer, softer white */
+  --surface-elevated: #FFFFFF;
+  --surface-accent: #F1F5F9; /* Slate 100 - beautiful cool tint */
+  --surface-glass: rgba(255, 255, 255, 0.85);
+
+  --text-main: #0F172A; /* Slate 900 */
+  --text-muted: #475569; /* Slate 600 - rich and readable */
+  --text-inverse: #FFFFFF;
+
+  --border-subtle: #E2E8F0; /* Slate 200 */
+  --border-strong: #CBD5E1; /* Slate 300 */
+
+  /* Brighter Hero area gradients */
+  --bg-gradient-1: rgba(99, 102, 241, 0.05); /* Indigo tint */
+  --bg-gradient-2: rgba(236, 72, 153, 0.04); /* Pink tint */
+
+  /* Softer but richer shadows */
+  --shadow-soft: 0 20px 40px rgba(15, 23, 42, 0.04), 0 2px 8px rgba(15, 23, 42, 0.02);
+  --shadow-glow: 0 0 0 1px rgba(99, 102, 241, 0.1), 0 20px 60px rgba(124, 58, 237, 0.08);
+  --shadow-violet: 0 0 40px rgba(124, 58, 237, 0.12);
+}
+
+:root.dark {
+  /* DARK MODE SEMANTIC TOKENS */
+  --surface-base: #05070D;
+  --surface-elevated: #0B101D;
+  --surface-accent: #0A0D18;
+  --surface-glass: rgba(11, 16, 29, 0.75);
+
+  --text-main: #F8FAFC; /* Slate 50 */
+  --text-muted: #94A3B8; /* Slate 400 */
+  --text-inverse: #05070D;
+
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.25);
+
+  --bg-gradient-1: rgba(124, 58, 237, 0.22);
+  --bg-gradient-2: rgba(251, 171, 255, 0.12);
+
+  --shadow-soft: 0 20px 70px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 0 1px rgba(208,188,255,.22), 0 24px 80px rgba(139,92,246,.24);
+  --shadow-violet: 0 0 55px rgba(208,188,255,.28);
 }
 
 html {
@@ -17,10 +61,12 @@ body {
   margin: 0;
   min-width: 320px;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(124, 58, 237, 0.22), transparent 32rem),
-    radial-gradient(circle at 80% 10%, rgba(251, 171, 255, 0.12), transparent 30rem),
-    #05070d;
+  background-color: var(--surface-base);
+  background-image: 
+    radial-gradient(circle at 20% 0%, var(--bg-gradient-1), transparent 32rem),
+    radial-gradient(circle at 80% 10%, var(--bg-gradient-2), transparent 30rem);
+  color: var(--text-main);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 button,
@@ -38,15 +84,33 @@ textarea {
   text-wrap: balance;
 }
 
+/* HIGH VISIBILITY GLASS PANELS */
 .glass-panel {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035));
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(22px);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-elevated);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(24px);
+  transition: all 0.3s ease;
 }
 
+/* Glossy edge only in Light Mode */
+:root:not(.dark) .glass-panel {
+  box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+:root.dark .glass-panel {
+  box-shadow: var(--shadow-soft);
+}
+
+/* GRADIENT TEXT */
 .gradient-text {
   background: linear-gradient(90deg, #ffffff 0%, #d0bcff 42%, #fbabff 72%, #4fdbc8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+:root:not(.dark) .gradient-text {
+  background: linear-gradient(90deg, #0F172A 0%, #4F46E5 42%, #DB2777 72%, #0D9488 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -55,7 +119,11 @@ textarea {
 .glow-text {
   text-shadow: 0 0 32px rgba(208, 188, 255, 0.42);
 }
+:root:not(.dark) .glow-text {
+  text-shadow: none;
+}
 
+/* CINEMATIC HERO */
 .cinematic-hero {
   isolation: isolate;
   margin-bottom: -1px;
@@ -63,16 +131,27 @@ textarea {
 
 .cinematic-hero-vignette {
   background:
+    radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.6), transparent 28rem),
+    linear-gradient(180deg, rgba(252, 253, 253, 0.1), rgba(252, 253, 253, 0.8) 72%, #FCFDFD 100%);
+}
+:root.dark .cinematic-hero-vignette {
+  background:
     radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.04), transparent 24rem),
     linear-gradient(180deg, rgba(5, 7, 13, 0.1), rgba(5, 7, 13, 0.28) 72%, #05070d 100%);
 }
 
 .cinematic-title {
-  background: linear-gradient(100deg, #ffffff 0%, #eef5ff 30%, #c8d5ff 54%, #b79cff 78%, #f5eaff 100%);
+  background: linear-gradient(100deg, #0F172A 0%, #334155 30%, #0F172A 54%, #475569 78%, #0F172A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   letter-spacing: 0;
+}
+:root.dark .cinematic-title {
+  background: linear-gradient(100deg, #ffffff 0%, #eef5ff 30%, #c8d5ff 54%, #b79cff 78%, #f5eaff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   text-shadow:
     0 0 16px rgba(255, 255, 255, 0.22),
     0 0 44px rgba(124, 143, 255, 0.5),
@@ -81,15 +160,11 @@ textarea {
 
 .cinematic-card {
   min-width: max-content;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--border-strong);
   border-radius: 999px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.045)),
-    rgba(5, 7, 13, 0.22);
-  box-shadow:
-    0 18px 60px rgba(0, 0, 0, 0.26),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
-  color: rgba(255, 255, 255, 0.82);
+  background: var(--surface-glass);
+  box-shadow: var(--shadow-soft);
+  color: var(--text-main);
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.08em;

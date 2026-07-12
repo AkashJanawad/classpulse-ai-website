@@ -94,18 +94,27 @@ export default function CinematicHero() {
       context.save();
       context.scale(dpr, dpr);
 
+      const isDark = document.documentElement.classList.contains('dark');
+
       const gradient = context.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, '#030817');
-      gradient.addColorStop(0.42, '#07112b');
-      gradient.addColorStop(0.72, '#160d31');
-      gradient.addColorStop(1, '#05070d');
+      if (isDark) {
+        gradient.addColorStop(0, '#030817');
+        gradient.addColorStop(0.42, '#07112b');
+        gradient.addColorStop(0.72, '#160d31');
+        gradient.addColorStop(1, '#05070d');
+      } else {
+        gradient.addColorStop(0, '#ffffff');
+        gradient.addColorStop(0.42, '#f8faff');
+        gradient.addColorStop(0.72, '#eef2ff');
+        gradient.addColorStop(1, '#fafafa');
+      }
       context.fillStyle = gradient;
       context.fillRect(0, 0, width, height);
 
       const glow = context.createRadialGradient(width * 0.5, height * 0.46, 0, width * 0.5, height * 0.46, width * 0.58);
-      glow.addColorStop(0, 'rgba(99, 102, 241, 0.24)');
-      glow.addColorStop(0.44, 'rgba(147, 51, 234, 0.13)');
-      glow.addColorStop(1, 'rgba(5, 7, 13, 0)');
+      glow.addColorStop(0, isDark ? 'rgba(99, 102, 241, 0.24)' : 'rgba(99, 102, 241, 0.08)');
+      glow.addColorStop(0.44, isDark ? 'rgba(147, 51, 234, 0.13)' : 'rgba(147, 51, 234, 0.04)');
+      glow.addColorStop(1, isDark ? 'rgba(5, 7, 13, 0)' : 'rgba(255, 255, 255, 0)');
       context.fillStyle = glow;
       context.fillRect(0, 0, width, height);
 
@@ -166,7 +175,7 @@ export default function CinematicHero() {
   }, [scrollProgress]);
 
   return (
-    <section className="cinematic-hero relative h-screen overflow-clip bg-[#05070d]" aria-label="ClassPulse AI hero">
+    <section className="cinematic-hero relative h-screen overflow-clip bg-paper dark:bg-night transition-colors duration-300" aria-label="ClassPulse AI hero">
       <motion.div className="sticky top-0 h-screen overflow-hidden will-change-transform" style={{ opacity: heroOpacity, scale: heroScale }}>
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
         <div className="cinematic-hero-vignette absolute inset-0" aria-hidden="true" />

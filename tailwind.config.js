@@ -5,30 +5,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#0b1215',
-        night: '#05070d',
-        paper: '#f7fbfa',
-        mist: '#e8f2ef',
+        // Semantic Theme Tokens
+        surface: {
+          base: 'var(--surface-base)',
+          elevated: 'var(--surface-elevated)',
+          accent: 'var(--surface-accent)',
+          glass: 'var(--surface-glass)',
+        },
+        text: {
+          main: 'var(--text-main)',
+          muted: 'var(--text-muted)',
+          inverse: 'var(--text-inverse)',
+        },
+        border: {
+          subtle: 'var(--border-subtle)',
+          strong: 'var(--border-strong)',
+        },
+        
+        // Legacy/Brand Colors (Kept for accents)
         primary: '#d0bcff',
         secondary: '#fbabff',
         tertiary: '#4fdbc8',
-        surface: '#111417',
-        'surface-high': '#1d2023',
-        teal: {
-          50: '#ecfdf8',
-          100: '#d3f8ee',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-        },
         coral: '#f9735b',
         marigold: '#f5b640',
-        iris: '#6366f1',
+        ink: '#0b1215',
+        night: '#05070d',
       },
       boxShadow: {
-        soft: '0 20px 70px rgba(13, 43, 47, 0.14)',
-        glow: '0 0 0 1px rgba(208,188,255,.22), 0 24px 80px rgba(139,92,246,.24)',
-        violet: '0 0 55px rgba(208,188,255,.28)',
+        soft: 'var(--shadow-soft)',
+        glow: 'var(--shadow-glow)',
+        violet: 'var(--shadow-violet)',
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Arial', 'sans-serif'],

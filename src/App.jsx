@@ -13,7 +13,7 @@ import TermsConditions from './pages/TermsConditions.jsx';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#05070d] text-white antialiased">
+    <div className="min-h-screen bg-transparent antialiased">
       <ScrollToTop />
       <Navbar />
       <main id="main-content">

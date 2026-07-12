@@ -1,10 +1,15 @@
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Target, Lightbulb } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Architecture from '../components/Architecture.jsx';
 import ButtonLink from '../components/ButtonLink.jsx';
 import CinematicHero from '../components/CinematicHero.jsx';
-import ProductVisual from '../components/ProductVisual.jsx';
+import FeaturesCarousel from '../components/FeaturesCarousel.jsx';
+import Pipeline from '../components/Pipeline.jsx';
+import PlatformOverview from '../components/PlatformOverview.jsx';
+import Roadmap from '../components/Roadmap.jsx';
 import SectionHeader from '../components/SectionHeader.jsx';
-import { contactDetails, featureCards, founders, metrics, values, workflow } from '../data/site.js';
+import TechStack from '../components/TechStack.jsx';
+import { contactDetails, founders, metrics, values } from '../data/site.js';
 import useSeo from '../hooks/useSeo.js';
 
 export default function Home() {
@@ -15,157 +20,225 @@ export default function Home() {
   });
 
   return (
-    <>
-      <CinematicHero />
+    <div className="flex flex-col bg-surface-base transition-colors duration-300">
+      <div id="home">
+        <CinematicHero />
+      </div>
 
-      <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[.9fr_1.1fr]">
-          <div>
+      <main className="flex-1 w-full relative z-10 transition-colors duration-300">
+        
+        {/* PLATFORM SECTION */}
+        <section id="platform" className="relative px-4 py-32 sm:px-6 lg:px-8 scroll-mt-16 bg-surface-accent">
+          <div className="mx-auto max-w-7xl">
             <SectionHeader
-              eyebrow="Classroom intelligence"
-              title="ClassPulse AI transforms how classrooms understand students."
-              text="The platform connects school signals into a live operating view: attention patterns, attendance trends, teacher notes, and AI summaries that stay grounded in human review."
+              eyebrow="Intelligence in Action"
+              title="A live operating view for modern schools."
+              text="Connect school signals into actionable insights: attention patterns, attendance trends, and AI summaries that stay grounded in human review."
+              align="center"
             />
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            
+            <div className="mt-20">
+              <PlatformOverview />
+            </div>
+
+            <div className="mt-24 grid gap-8 sm:grid-cols-3 max-w-5xl mx-auto">
               {metrics.map((metric) => (
-                <div key={metric.label} className="glass-panel rounded-xl p-4">
-                  <p className="text-2xl font-black text-white">{metric.value}</p>
-                  <p className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-primary">{metric.label}</p>
-                  <p className="mt-2 text-sm text-white/58">{metric.detail}</p>
+                <div key={metric.label} className="glass-panel rounded-3xl p-10 text-center shadow-soft hover:shadow-md transition-shadow">
+                  <p className="text-6xl font-black text-primary mb-4 drop-shadow-sm">{metric.value}</p>
+                  <p className="text-sm font-bold uppercase tracking-widest text-text-muted">{metric.label}</p>
+                  <p className="mt-4 text-base text-text-muted leading-relaxed">{metric.detail}</p>
                 </div>
               ))}
             </div>
           </div>
-          <ProductVisual />
-        </div>
-      </section>
+        </section>
 
-      <section className="px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader
-            eyebrow="What it does"
-            title="Intelligence at every level of the school day."
-            text="Comprehensive AI tools for the modern classroom, presented as practical workflows schools can pilot without heavy infrastructure."
-            align="center"
-          />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {featureCards.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <article
-                  key={feature.title}
-                  className={`glass-panel group rounded-2xl p-6 transition duration-300 hover:-translate-y-1 hover:border-primary/40 ${
-                    index === 0 ? 'lg:col-span-2' : ''
-                  }`}
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-primary/25 bg-primary/12 text-primary">
-                    <Icon size={23} aria-hidden="true" />
-                  </div>
-                  <h3 className="mt-5 text-xl font-black text-white">{feature.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-white/64">{feature.text}</p>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-white/[0.03] px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-          <SectionHeader
-            eyebrow="How it works"
-            title="From classroom signals to school action."
-            text="The platform is intentionally simple to operate on smaller infrastructure while leaving room for serious product growth."
-          />
-          <div className="grid gap-4">
-            {workflow.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <article key={item.title} className="glass-panel grid gap-4 rounded-2xl p-5 sm:grid-cols-[auto_1fr]">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-tertiary/25 bg-tertiary/10 text-tertiary">
-                    <Icon size={22} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-black uppercase tracking-[0.18em] text-tertiary">Step {index + 1}</p>
-                    <h3 className="mt-1 text-xl font-black text-white">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-white/64">{item.text}</p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-4 py-20 sm:px-6 lg:px-8">
-        <div className="glass-panel mx-auto grid max-w-7xl gap-8 rounded-2xl p-6 sm:p-8 lg:grid-cols-[.92fr_1.08fr] lg:items-center">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">
-              Founder-led from {contactDetails.address}
-            </p>
-            <h2 className="mt-4 text-balance text-3xl font-black leading-tight text-white sm:text-4xl">
-              Built by owners close to the product, users, and deployment reality.
-            </h2>
-            <p className="mt-4 text-base leading-8 text-white/68">
-              ClassPulse AI is being shaped as a practical school-tech product by a focused ownership team across
-              product, technology, design, operations, and growth.
-            </p>
-            <div className="mt-6">
-              <ButtonLink to="/team" variant="secondary">
-                Meet the owners
-              </ButtonLink>
+        {/* FEATURES SECTION */}
+        <section id="features" className="px-4 py-32 sm:px-6 lg:px-8 scroll-mt-16 bg-surface-base">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeader
+              eyebrow="What it does"
+              title="Intelligence at every level of the school day."
+              text="Comprehensive AI tools presented as practical workflows schools can pilot effortlessly."
+              align="center"
+            />
+            <div className="mt-16 overflow-hidden">
+              <FeaturesCarousel />
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-5">
-            {founders.map((person) => (
-              <Link key={person.name} to="/team" className="group text-center">
-                <div className="mx-auto h-24 w-24 rounded-full border border-primary/30 bg-white/8 p-1 shadow-violet transition group-hover:-translate-y-1 group-hover:border-secondary/60 sm:h-20 sm:w-20 lg:h-24 lg:w-24">
-                  <img src={person.image} alt={person.name} className="h-full w-full rounded-full object-cover" loading="lazy" />
-                </div>
-                <p className="mt-3 text-sm font-black leading-tight text-white">{person.name}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/16 via-secondary/10 to-tertiary/10 p-6 text-white shadow-violet sm:p-8 lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-            <div>
-              <h2 className="max-w-3xl text-3xl font-black leading-tight sm:text-4xl">
-                Built for lean deployment, from GitHub to a small Android production server.
-              </h2>
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                {values.map((value) => {
-                  const Icon = value.icon;
-                  return (
-                    <div key={value.title} className="rounded-xl border border-white/10 bg-white/8 p-4 backdrop-blur-xl">
-                      <Icon size={21} className="text-tertiary" aria-hidden="true" />
-                      <h3 className="mt-3 text-base font-black">{value.title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-white/68">{value.text}</p>
-                    </div>
-                  );
-                })}
+        {/* HOW IT WORKS SECTION (Standalone) */}
+        <section id="how-it-works" className="px-4 py-32 sm:px-6 lg:px-8 bg-surface-accent">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeader
+              eyebrow="Pipeline"
+              title="From classroom signals to school action."
+              text="An intentionally simple pipeline to operate on smaller infrastructure while leaving room for serious product growth."
+              align="center"
+            />
+            <div className="mt-20">
+              <Pipeline />
+            </div>
+          </div>
+        </section>
+
+        {/* TECHNOLOGY SECTION */}
+        <section id="technology" className="px-4 py-32 sm:px-6 lg:px-8 scroll-mt-16 bg-surface-base">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeader
+              eyebrow="Tech Stack"
+              title="Powered by modern frameworks."
+              text="A blend of robust backend processing and fluid frontend experiences."
+              align="center"
+            />
+            <div className="mt-20">
+              <TechStack />
+            </div>
+          </div>
+        </section>
+
+        {/* ABOUT SECTION (Unified) */}
+        <section id="about" className="px-4 py-32 sm:px-6 lg:px-8 scroll-mt-16 bg-surface-accent">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeader
+              eyebrow="About Us"
+              title="Our Mission, Vision, and Architecture."
+              text="Discover the foundational ideas and technical design driving ClassPulse AI."
+              align="center"
+            />
+            
+            {/* Mission & Vision Subsections */}
+            <div className="mt-24 grid gap-10 lg:grid-cols-2 max-w-5xl mx-auto">
+              <div className="glass-panel p-12 rounded-[2rem] shadow-soft hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-5 mb-8">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-base border border-border-subtle text-primary shadow-sm">
+                    <Target size={28} />
+                  </div>
+                  <h3 className="text-3xl font-bold text-text-main">Our Mission</h3>
+                </div>
+                <p className="text-lg text-text-muted leading-relaxed">
+                  To provide privacy-aware classroom intelligence that empowers schools to act on early signals, make clearer decisions, and support students effectively without compromising human judgment.
+                </p>
+              </div>
+
+              <div className="glass-panel p-12 rounded-[2rem] shadow-soft hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-5 mb-8">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-base border border-border-subtle text-secondary shadow-sm">
+                    <Lightbulb size={28} />
+                  </div>
+                  <h3 className="text-3xl font-bold text-text-main">Our Vision</h3>
+                </div>
+                <p className="text-lg text-text-muted leading-relaxed">
+                  To become the invisible, supportive pulse of modern education—where AI seamlessly bridges the gap between classroom activity and actionable school-wide insights.
+                </p>
               </div>
             </div>
-            <Link
-              to="/contact"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/15 bg-white px-5 text-sm font-black text-night transition hover:-translate-y-0.5 hover:bg-primary"
-            >
-              Talk to us <ArrowRight size={18} aria-hidden="true" />
-            </Link>
+
+            {/* Architecture Subsection */}
+            <div className="mt-32">
+              <div className="text-center mb-16">
+                <h3 className="text-3xl font-bold text-text-main">System Architecture</h3>
+                <p className="mt-4 text-base text-text-muted">Lean, scalable intelligence from edge to cloud.</p>
+              </div>
+              <Architecture />
+            </div>
+
+            {/* Team Subsection */}
+            <div className="mt-32">
+              <div className="glass-panel mx-auto grid max-w-7xl gap-16 rounded-[2.5rem] p-12 sm:p-16 lg:grid-cols-[1fr_1.2fr] lg:items-center shadow-soft">
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">
+                    Founder-led from {contactDetails.address}
+                  </p>
+                  <h3 className="mt-6 text-balance text-4xl font-black leading-tight text-text-main">
+                    Built by owners close to the product and users.
+                  </h3>
+                  <p className="mt-6 text-lg leading-relaxed text-text-muted">
+                    ClassPulse AI is being shaped as a practical school-tech product by a focused ownership team across
+                    product, technology, design, operations, and growth.
+                  </p>
+                  <div className="mt-10">
+                    <ButtonLink to="/team" variant="secondary">
+                      Meet the full team
+                    </ButtonLink>
+                  </div>
+                </div>
+                <div className="grid gap-8 sm:grid-cols-3">
+                  {founders.slice(0,3).map((person) => (
+                    <Link key={person.name} to="/team" className="group text-center">
+                      <div className="mx-auto h-28 w-28 rounded-full border-4 border-surface-base bg-surface-elevated p-1 shadow-md transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_10px_30px_rgba(208,188,255,0.4)]">
+                        <img src={person.image} alt={person.name} className="h-full w-full rounded-full object-cover" loading="lazy" />
+                      </div>
+                      <p className="mt-5 text-base font-bold leading-tight text-text-main">{person.name}</p>
+                      <p className="mt-2 text-sm font-medium text-text-muted">{person.role.split(',')[0]}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
           </div>
-          <div className="mt-8 flex flex-wrap gap-3 text-sm font-bold text-white/72">
-            {['React + Vite', 'TailwindCSS', 'Node.js', 'Express', 'Linux', 'Termux', 'Cloudflare Tunnel'].map((item) => (
-              <span key={item} className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2">
-                <CheckCircle2 size={15} aria-hidden="true" />
-                {item}
-              </span>
-            ))}
+        </section>
+
+        {/* ROADMAP SECTION */}
+        <section id="roadmap" className="px-4 py-32 sm:px-6 lg:px-8 scroll-mt-16 bg-surface-base">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeader
+              eyebrow="The Journey"
+              title="Building the future of education."
+              text="Our progress and what's coming next for the ClassPulse AI platform."
+              align="center"
+            />
+            <div className="mt-20">
+              <Roadmap />
+            </div>
           </div>
-        </div>
-      </section>
-    </>
+        </section>
+
+        {/* CONTACT / CTA SECTION */}
+        <section id="contact" className="px-4 py-32 sm:px-6 lg:px-8 scroll-mt-16 bg-surface-accent">
+          <div className="mx-auto max-w-7xl rounded-[2.5rem] border border-border-subtle bg-surface-elevated p-12 text-text-main shadow-soft sm:p-16 transition-shadow hover:shadow-lg">
+            <div className="grid gap-16 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div>
+                <h2 className="max-w-3xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl text-text-main">
+                  Built for lean deployment, from GitHub to production.
+                </h2>
+                <div className="mt-12 grid gap-8 sm:grid-cols-3">
+                  {values.map((value) => {
+                    const Icon = value.icon;
+                    return (
+                      <div key={value.title} className="rounded-3xl border border-border-subtle bg-surface-base p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-md">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-elevated border border-border-subtle text-tertiary mb-6 shadow-sm">
+                          <Icon size={24} aria-hidden="true" />
+                        </div>
+                        <h3 className="text-xl font-bold text-text-main">{value.title}</h3>
+                        <p className="mt-4 text-base leading-relaxed text-text-muted">{value.text}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="flex flex-col items-start gap-4">
+                <Link
+                  to="/contact"
+                  className="inline-flex min-h-16 items-center justify-center gap-3 rounded-full bg-text-main px-10 text-lg font-bold text-text-inverse shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:scale-[1.02]"
+                >
+                  Talk to us <ArrowRight size={24} aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+            <div className="mt-20 flex flex-wrap gap-4 text-sm font-semibold text-text-muted">
+              {['React + Vite', 'TailwindCSS', 'Node.js', 'Express', 'Linux', 'Termux', 'Cloudflare Tunnel'].map((item) => (
+                <span key={item} className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface-base px-5 py-2.5 shadow-sm">
+                  <CheckCircle2 size={18} className="text-primary" aria-hidden="true" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
